@@ -1,9 +1,11 @@
+import 'package:devfest_app/config/index.dart';
 import 'package:devfest_app/utils/devfest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
@@ -12,16 +14,5 @@ Future<void> main() async {
 
   Devfest.prefs = await SharedPreferences.getInstance();
 
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'GDG Devfest',
-      theme: ThemeData(primarySwatch: Colors.blue),
-    );
-  }
+  runApp(ConfigPage());
 }
