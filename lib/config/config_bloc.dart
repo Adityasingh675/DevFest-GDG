@@ -3,6 +3,7 @@ import 'package:devfest_app/config/index.dart';
 
 class ConfigBloc extends Bloc<ConfigEvent, ConfigState> {
   // ConfigBloc() : super(ConfigInitial());
+  ConfigBloc._internal() : super(null);
 
   static final ConfigBloc _configBlocSingleton = ConfigBloc._internal();
 
@@ -13,8 +14,6 @@ class ConfigBloc extends Bloc<ConfigEvent, ConfigState> {
   void dispose() {
     _configBlocSingleton.close();
   }
-
-  ConfigBloc._internal() : super(null);
 
   bool darkModeOn = false;
 
