@@ -1,5 +1,6 @@
 import 'package:devfest_app/config/config_bloc.dart';
 import 'package:devfest_app/config/config_state.dart';
+import 'package:devfest_app/home/homepage.dart';
 import 'package:devfest_app/utils/devfest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,7 @@ class _ConfigPageState extends State<ConfigPage> {
   setupApp() {
     configBloc = ConfigBloc();
     configBloc.darkModeOn =
-        Devfest.prefs.getBool(Devfest.darkModePrefs) ?? true;
+        Devfest.prefs.getBool(Devfest.darkModePrefs) ?? false;
   }
 
   @override
@@ -55,10 +56,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 elevation: 0.0,
               ),
             ),
-            home: Scaffold(
-              appBar: AppBar(),
-              body: Container(),
-            ),
+            home: HomePage(),
           );
         },
       ),

@@ -9,7 +9,7 @@ abstract class ConfigEvent extends Equatable {
   @override
   List<Object> get props => [];
 
-  Future<ConfigState> applyAsync({ConfigState currentState, ConfigBloc bloc});
+  Future<ConfigState> applyAsync({ConfigState state, ConfigBloc bloc});
 }
 
 class DarkModeEvent extends ConfigEvent {
@@ -19,15 +19,14 @@ class DarkModeEvent extends ConfigEvent {
   String toString() => 'LoadConfigEvent';
 
   @override
-  Future<ConfigState> applyAsync(
-      {ConfigState currentState, ConfigBloc bloc}) async {
+  Future<ConfigState> applyAsync({ConfigState state, ConfigBloc bloc}) async {
     try {
       bloc.darkModeOn = darkOn;
       Devfest.prefs.setBool(Devfest.darkModePrefs, darkOn);
       return InConfigState();
     } catch (_, stackTrace) {
       print('$_ $stackTrace');
-      ErrorConfigState(_?.toString());
+      return ErrorConfigState(_?.toString());
     }
   }
 }
@@ -37,8 +36,7 @@ class LoadConfigEvent extends ConfigEvent {
   String toString() => 'LoadConfigEvent';
 
   @override
-  Future<ConfigState> applyAsync(
-      {ConfigState currentState, ConfigBloc bloc}) async {
+  Future<ConfigState> applyAsync({ConfigState state, ConfigBloc bloc}) async {
     try {
       await Future.delayed(Duration(seconds: 2));
     } catch (_, stackTrace) {
